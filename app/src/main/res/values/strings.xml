@@ -7,4 +7,17 @@
     <string name="_4">4</string>
     <string name="_5">5</string>
     <string name="_6">6</string>
+    <string name="color_white">white</string>
+
+    <string name="color_neutral">#FFFFFF</string>
+    <string name="color1">#FFBB86FC</string>
+    <string name="color2">#4CAF50</string>
+    <string name="color3">#880E4F</string>
+    <string name="color4">#F4511E</string>
+    <string name="color5">#F9A825</string>
+    <string name="color6">#006064</string>
+    <string name="win_title">Parabéns!</string>
+    <string name="win_text">Você tem uma boa memória</string>
+    <string name="progress_text">Progresso:</string>
+
 </resources>

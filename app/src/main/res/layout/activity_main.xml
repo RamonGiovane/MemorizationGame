@@ -1,87 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:columnCount="2"
-    android:rowCount="4"
-    android:id="@+id/gridLayout"
-    tools:context=".MainActivity">
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:columnCount="2"
+        android:rowCount="4"
+        android:id="@+id/gridLayout"
+        tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonrestart"
-        android:text="@string/reiniciar"
-        android:onClick="CheckNumber"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="80dp"
-        android:layout_columnSpan="2"
-        android:layout_height="50dp"
-        android:layout_width="150dp"
-        android:layout_marginStart="80dp" />
+        <Button
+            android:id="@+id/buttonrestart"
+            android:text="@string/reiniciar"
+            android:onClick="Restart"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="80dp"
+            android:layout_columnSpan="2"
+            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_marginStart="80dp" />
 
-    <Button
-        android:id="@+id/button1"
-        android:text="@string/_1"
-        android:onClick="CheckNumber"
-        android:layout_marginTop="10dp"
-        android:layout_height="150dp"
-        android:layout_width="150dp"
 
-      />
+        <TextView
+            android:id="@+id/win_title"
+            android:text="@string/win_title"
+            android:textSize="32dp"
+            android:layout_columnSpan="2"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_width="150dp"
 
-    <Button
-        android:id="@+id/button2"
-        android:text="@string/_2"
-        android:onClick="CheckNumber"
-        android:backgroundTint="#4CAF50"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_height="150dp"
-        android:layout_width="150dp"
-        android:layout_marginStart="10dp" />
+            android:visibility="gone"
+            />
 
-    <Button
-        android:id="@+id/button3"
-        android:text="@string/_3"
-        android:onClick="CheckNumber"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#880E4F"
-        android:layout_height="150dp"
-        android:layout_width="150dp"/>
+        <TextView
+            android:id="@+id/win_text"
+            android:text="@string/win_text"
+            android:textSize="20dp"
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="30dp"
 
-    <Button
-        android:id="@+id/button4"
-        android:text="@string/_4"
-        android:onClick="CheckNumber"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:backgroundTint="#F4511E"
-        android:layout_height="150dp"
-        android:layout_width="150dp"
-        android:layout_marginStart="10dp" />
-
-    <Button
-        android:id="@+id/button5"
-        android:text="@string/_5"
-        android:onClick="CheckNumber"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#F9A825"
-        android:layout_height="150dp"
-        android:layout_width="150dp"/>
-
-    <Button
-        android:id="@+id/button6"
-        android:text="@string/_6"
-        android:onClick="CheckNumber"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:backgroundTint="#006064"
-        android:layout_height="150dp"
-        android:layout_width="150dp"
-        android:layout_marginStart="10dp" />
+            android:visibility="gone"
+            />
 
 
 
-</GridLayout>
+        <Button
+            android:id="@+id/button1"
+            android:text="@string/_1"
+
+            android:onClick="CheckNumber"
+            android:layout_marginTop="10dp"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+
+
+          />
+
+        <Button
+            android:id="@+id/button2"
+            android:text="@string/_2"
+            android:onClick="CheckNumber"
+            app:backgroundTint="#4CAF50"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+            android:layout_marginStart="10dp"
+
+            />
+
+
+        <Button
+            android:id="@+id/button3"
+            android:text="@string/_3"
+            android:onClick="CheckNumber"
+            android:layout_marginTop="10dp"
+            app:backgroundTint="#880E4F"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+
+            />
+
+        <Button
+            android:id="@+id/button4"
+            android:text="@string/_4"
+            android:onClick="CheckNumber"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            app:backgroundTint="#F4511E"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+            android:layout_marginStart="10dp"
+
+            />
+
+        <Button
+            android:id="@+id/button5"
+            android:text="@string/_5"
+            android:onClick="CheckNumber"
+            android:layout_marginTop="10dp"
+            app:backgroundTint="#F9A825"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+
+            />
+
+        <Button
+            android:id="@+id/button6"
+            android:text="@string/_6"
+            android:onClick="CheckNumber"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            app:backgroundTint="#006064"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+            android:layout_marginStart="10dp"
+
+            />
+
+
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:text="@string/progress_text"
+            android:textSize="15dp"
+            android:layout_marginTop="30dp"
+
+         />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:minHeight="80dp"
+            android:minWidth="250dp"
+            android:scaleY="3.5"
+            android:progress="1"
+            />
+
+    </GridLayout>
