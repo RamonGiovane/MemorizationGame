@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Integer> sequence;
 
+    private ProgressBar progressBar;
+
     private int correctNumbers;
 
     @Override
@@ -25,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
         correctNumbers = 0;
         GenerateNumbers();
+
+        int id = getResources().getIdentifier("progressBar", "id", getPackageName());
+        progressBar = (ProgressBar) findViewById(id);
+
     }
 
     private void SetWin(boolean enable){
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         GenerateNumbers();
 
         SetWin(false);
+
+        ChangeProgressBar();
 
         for (int i = 1; i <= 6; i++) {
             int id = getResources().getIdentifier("button"+i, "id", getPackageName());
@@ -76,10 +85,22 @@ public class MainActivity extends AppCompatActivity {
             view.setVisibility(View.INVISIBLE);
 
             correctNumbers++;
+
+            ChangeProgressBar();
         }
+
+
 
         if(correctNumbers == 6)
             SetWin(true);
+    }
+
+    private void ChangeProgressBar(){
+
+        progressBar.setProgress(0);
+        progressBar.setMax(6);
+        progressBar.setProgress(correctNumbers);
+
     }
 
     private void GenerateNumbers(){

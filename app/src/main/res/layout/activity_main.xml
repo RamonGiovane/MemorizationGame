@@ -25,24 +25,24 @@
         <TextView
             android:id="@+id/win_title"
             android:text="@string/win_title"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:layout_columnSpan="2"
             android:layout_marginTop="80dp"
             android:layout_marginLeft="80dp"
             android:layout_width="150dp"
 
             android:visibility="gone"
-            />
+            android:layout_marginStart="80dp" />
 
         <TextView
             android:id="@+id/win_text"
             android:text="@string/win_text"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_columnSpan="2"
             android:layout_marginLeft="30dp"
 
             android:visibility="gone"
-            />
+            android:layout_marginStart="30dp" />
 
 
 
@@ -125,8 +125,8 @@
         <TextView
             android:id="@+id/progress_text"
             android:text="@string/progress_text"
-            android:textSize="15dp"
-            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:layout_marginTop="22dp"
 
          />
 
