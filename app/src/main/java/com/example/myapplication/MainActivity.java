@@ -43,13 +43,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
     }
 
-    public void Restart(View view){
+    public void ResetScreen(View view){
+
         correctNumbers = 0;
-        GenerateNumbers();
-
-        SetWin(false);
-
-        ChangeProgressBar();
 
         for (int i = 1; i <= 6; i++) {
             int id = getResources().getIdentifier("button"+i, "id", getPackageName());
@@ -58,6 +54,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ChangeBackgroundColor(view,  getResources().getString(R.string.color_neutral));
+
+        ChangeProgressBar();
+
+    }
+    public void Restart(View view){
+
+        GenerateNumbers();
+
+        SetWin(false);
+
+        ResetScreen(view);
     }
 
     private void ChangeBackgroundColor(final View someView, String color) {
@@ -88,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
             ChangeProgressBar();
         }
+
+        else
+            ResetScreen(view);
 
 
 
