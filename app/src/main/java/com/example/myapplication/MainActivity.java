@@ -1,15 +1,12 @@
 package com.example.myapplication;
 
-import android.app.Activity;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,23 +27,59 @@ public class MainActivity extends AppCompatActivity {
         GenerateNumbers();
     }
 
+    private void SetWin(boolean enable){
+
+        int id = getResources().getIdentifier("win_title", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+
+        id = getResources().getIdentifier("win_text", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+    }
+
+    public void Restart(View view){
+        correctNumbers = 0;
+        GenerateNumbers();
+
+        SetWin(false);
+
+        for (int i = 1; i <= 6; i++) {
+            int id = getResources().getIdentifier("button"+i, "id", getPackageName());
+            Button button = (Button) findViewById(id);
+            button.setVisibility(View.VISIBLE);
+        }
+
+        ChangeBackgroundColor(view,  getResources().getString(R.string.color_neutral));
+    }
+
+    private void ChangeBackgroundColor(final View someView, String color) {
+        // Find the root view
+        View root = someView.getRootView();
+
+        Log.d("color", color);
+        // Set the color
+        root.setBackgroundColor(Color.parseColor(color));
+    }
+
     public void CheckNumber(View view){
 
         Button button = (Button) view;
 
         int number = Integer.parseInt(button.getText().toString());
 
-        //int colorNumber = ((ColorDrawable) button.getBackground()).getColor();
 
 
         if(number == sequence.get(correctNumbers)){
-            GridLayout gl = (GridLayout) findViewById(R.id.gridLayout);
-          //  gl.setBackgroundColor(colorNumber);
+
+            ChangeBackgroundColor(view, getResources().getString(
+                    getResources().getIdentifier("color" + number, "string", getPackageName())));
 
             view.setVisibility(View.INVISIBLE);
 
             correctNumbers++;
         }
+
+        if(correctNumbers == 6)
+            SetWin(true);
     }
 
     private void GenerateNumbers(){
