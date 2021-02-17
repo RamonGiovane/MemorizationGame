@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.game.app;
 
 import android.os.CountDownTimer;
 import android.widget.TextView;

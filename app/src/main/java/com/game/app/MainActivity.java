@@ -1,11 +1,9 @@
-package com.example.myapplication;
+package com.game.app;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -14,11 +12,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.time.Duration;
+import com.example.myapplication.R;
+import com.game.database.Database;
+import com.game.model.UserScore;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        StartDatabase();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -59,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
         scoreTimer.start();
     }
 
+    private void StartDatabase() {
+        Database db = new Database(this);
+
+        db.createOrOpen();
+
+        for(UserScore u : db.getAll())
+            Log.d("SCORES", u.getName() + " " + u.getErrors() + " " + u.getScore());
+    }
 
 
     private void SetWin(boolean enable){

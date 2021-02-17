@@ -8,7 +8,7 @@
         android:columnCount="2"
         android:rowCount="6"
         android:id="@+id/gridLayout"
-        tools:context=".MainActivity">
+        tools:context="com.game.app.MainActivity">
 
         <Button
             android:id="@+id/buttonrestart"
