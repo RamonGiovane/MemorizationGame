@@ -1,17 +1,24 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private int correctNumbers;
+
+    private int errorCount;
+
+    private TextView scoreText;
+
+    private ScoreTimer scoreTimer;
+
+    private EditText nameTextField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +47,73 @@ public class MainActivity extends AppCompatActivity {
         int id = getResources().getIdentifier("progressBar", "id", getPackageName());
         progressBar = (ProgressBar) findViewById(id);
 
+
+        id = getResources().getIdentifier("score", "id", getPackageName());
+        scoreText = (TextView) findViewById(id);
+
+        id = getResources().getIdentifier("text_field", "id", getPackageName());
+        nameTextField = (EditText) findViewById(id);
+        nameTextField.setOnFocusChangeListener(new KeyboardFocusListener(this, id));
+
+        scoreTimer = new ScoreTimer(scoreText);
+        scoreTimer.start();
     }
 
+
+
     private void SetWin(boolean enable){
+
+       if(enable) scoreTimer.cancel();
 
         int id = getResources().getIdentifier("win_title", "id", getPackageName());
         findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
 
         id = getResources().getIdentifier("win_text", "id", getPackageName());
         findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+
+
+        id = getResources().getIdentifier("progressBar", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.GONE : View.VISIBLE);
+
+
+        id = getResources().getIdentifier("progress_text", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.GONE : View.VISIBLE);
+
+        id = getResources().getIdentifier("mistakes_text", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+
+        id = getResources().getIdentifier("mistakes", "id", getPackageName());
+        TextView text = (TextView) findViewById(id);
+        text.setVisibility(enable ? View.VISIBLE : View.GONE);
+        text.setText(String.valueOf(errorCount));
+
+        for (int i = 1; i <= 6; i++) {
+            id = getResources().getIdentifier("button" + i, "id", getPackageName());
+            Button button = (Button) findViewById(id);
+            button.setVisibility(enable ? View.GONE : View.VISIBLE);
+        }
+
+        id = getResources().getIdentifier("text_field", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+
+
+        id = getResources().getIdentifier("ioo", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+
+
+        id = getResources().getIdentifier("save_button", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+
+        id = getResources().getIdentifier("buttonrestart", "id", getPackageName());
+        findViewById(id).setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
+
     }
 
     public void ResetScreen(View view){
 
         correctNumbers = 0;
 
-        for (int i = 1; i <= 6; i++) {
-            int id = getResources().getIdentifier("button"+i, "id", getPackageName());
-            Button button = (Button) findViewById(id);
-            button.setVisibility(View.VISIBLE);
-        }
+        SetWin(false);
 
         ChangeBackgroundColor(view,  getResources().getString(R.string.color_neutral));
 
@@ -65,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         SetWin(false);
 
         ResetScreen(view);
+
+        scoreTimer.start();
     }
 
     private void ChangeBackgroundColor(final View someView, String color) {
@@ -96,9 +160,10 @@ public class MainActivity extends AppCompatActivity {
             ChangeProgressBar();
         }
 
-        else
+        else {
+            errorCount++;
             ResetScreen(view);
-
+        }
 
 
         if(correctNumbers == 6)
@@ -114,24 +179,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void GenerateNumbers(){
+
+        errorCount = 0;
+
         Random r = new java.util.Random();
 
         sequence = new ArrayList<>();
 
-        while(sequence.size()  < 6){
-            int value  = r.nextInt(6) + 1;
+        sequence.add(1); sequence.add(2); sequence.add(3); sequence.add(4); sequence.add(5); sequence.add(6);
 
-            boolean repeated = false;
+        return;
+//
+//        while(sequence.size()  < 6){
+//            int value  = r.nextInt(6) + 1;
+//
+//            boolean repeated = false;
+//
+//            for(int v : sequence){
+//                if(value == v) {
+//                    repeated = true;
+//                    break;
+//                }
+//            }
+//
+//            if(!repeated) sequence.add(value);
+//        }
+    }
 
-            for(int v : sequence){
-                if(value == v) {
-                    repeated = true;
-                    break;
-                }
-            }
+    public void SaveAndRestart(View view){
+        int  id = getResources().getIdentifier("text_field", "id", getPackageName());
+        EditText textField = (EditText) findViewById(id);
 
-            if(!repeated) sequence.add(value);
+        if(textField.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Digite seu nome", Toast.LENGTH_SHORT)
+                    .show();
+            return;
         }
 
+
+
+        Restart(view);
     }
+
+
 }

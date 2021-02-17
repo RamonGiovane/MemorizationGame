@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:columnCount="2"
-        android:rowCount="4"
+        android:rowCount="6"
         android:id="@+id/gridLayout"
         tools:context=".MainActivity">
 
@@ -40,6 +40,7 @@
             android:textSize="20sp"
             android:layout_columnSpan="2"
             android:layout_marginLeft="30dp"
+            android:layout_marginBottom="30dp"
 
             android:visibility="gone"
             android:layout_marginStart="30dp" />
@@ -143,4 +144,63 @@
             android:progress="1"
             />
 
-    </GridLayout>
+    <TextView
+        android:id="@+id/score_text"
+        android:text="@string/scoreText"
+        android:textSize="20sp"
+        android:layout_marginTop="3dp" />
+
+    <TextView
+        android:id="@+id/score"
+        android:text="@string/zero"
+        android:textSize="20sp"
+        android:layout_marginTop="3dp" />
+
+    <TextView
+        android:id="@+id/mistakes_text"
+        android:text="@string/errors"
+        android:textSize="20sp"
+        android:layout_marginTop="3dp"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/mistakes"
+        android:text="@string/zero"
+        android:textSize="20sp"
+        android:layout_marginTop="3dp"
+        android:visibility="gone"
+        />
+
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:id="@+id/text_field"
+        android:autofillHints="Digite seu nome"
+        android:hint="@string/type_your_name"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/save_button"
+        android:text="@string/save"
+        android:onClick="SaveAndRestart"
+        android:layout_height="45dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/ioo"
+        android:layout_columnSpan="2"
+        android:text="@string/ranking_message"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="3dp"
+        android:visibility="gone" />
+
+
+</GridLayout>

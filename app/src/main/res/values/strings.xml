@@ -19,5 +19,11 @@
     <string name="win_title">Parabéns!</string>
     <string name="win_text">Você tem uma boa memória</string>
     <string name="progress_text">Progresso:</string>
+    <string name="scoreText">Pontuação:</string>
+    <string name="errors">Erros:</string>
+    <string name="zero">0</string>
+    <string name="ranking_message">Sua pontuação será guardada nos Rankings!</string>
+    <string name="type_your_name">Digite seu nome</string>
+    <string name="save">Continuar</string>
 
 </resources>
