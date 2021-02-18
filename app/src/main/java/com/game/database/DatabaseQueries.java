@@ -19,6 +19,12 @@ final class DatabaseQueries {
     static final String SQL_QUERY =
             "SELECT * from ranking";
 
+    static final String SQL_QUERY_BY_POINTS =
+            "SELECT * from ranking ORDER BY errors";
+
+    static final String SQL_QUERY_BY_ERRORS =
+            "SELECT * from ranking ORDER BY score DESC";
+
     static final String SQL_CHECK_TABLE =
             "SELECT count(*) FROM ranking";
 

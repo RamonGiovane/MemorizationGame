@@ -1,5 +1,6 @@
 package com.game.app;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,13 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText nameTextField;
 
+    private Database database;
+    private Intent rankingActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        StartDatabase();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        StartDatabase();
 
         correctNumbers = 0;
         GenerateNumbers();
@@ -60,14 +64,16 @@ public class MainActivity extends AppCompatActivity {
 
         scoreTimer = new ScoreTimer(scoreText);
         scoreTimer.start();
+
+        rankingActivity = new Intent(this, RankingActivity.class);
     }
 
     private void StartDatabase() {
-        Database db = new Database(this);
+        database = new Database(this);
 
-        db.createOrOpen();
+        database.createOrOpen();
 
-        for(UserScore u : db.getAll())
+        for(UserScore u : database.getAll())
             Log.d("SCORES", u.getName() + " " + u.getErrors() + " " + u.getScore());
     }
 
@@ -104,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
             button.setVisibility(enable ? View.GONE : View.VISIBLE);
         }
 
-        id = getResources().getIdentifier("text_field", "id", getPackageName());
-        findViewById(id).setVisibility(enable ? View.VISIBLE : View.GONE);
+
+        nameTextField.setVisibility(enable ? View.VISIBLE : View.GONE);
 
 
         id = getResources().getIdentifier("ioo", "id", getPackageName());
@@ -218,19 +224,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SaveAndRestart(View view){
-        int  id = getResources().getIdentifier("text_field", "id", getPackageName());
-        EditText textField = (EditText) findViewById(id);
 
-        if(textField.getText().toString().isEmpty()) {
+        String name = nameTextField.getText().toString();
+        int score = Integer.parseInt(scoreText.getText().toString());
+        int errors = errorCount;
+
+        if(nameTextField.getText().toString().isEmpty()) {
             Toast.makeText(this, "Digite seu nome", Toast.LENGTH_SHORT)
                     .show();
             return;
         }
 
-
+        database.insertRecord(new UserScore(score, errors, name, false));
 
         Restart(view);
     }
 
+    public void OpenRankings(View view){
+        startActivity(rankingActivity);
+    }
 
 }

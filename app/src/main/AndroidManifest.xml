@@ -9,10 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name="com.game.app.MainActivity">
+        <activity
+            android:name="com.game.app.RankingActivity"
+            android:label="@string/title_activity_ranking"
+            android:theme="@style/Theme.MyApplication.NoActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.game.app.MainActivity" />
+
+        </activity>
+        <activity android:name="com.game.app.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -15,13 +15,13 @@ public class Database {
     private final Context context;
     private SQLiteDatabase database;
     private Cursor cursor;
-    private int indexId, indexName, indexScore, indexErrors, indexIsBot;
 
     public Database(Context context){
         this.context = context;
     }
 
     public void createOrOpen(){
+
         database =  context.openOrCreateDatabase(DatabaseQueries.DATABASE_NAME,
                 DatabaseQueries.DATABASE_ACCESS, null);
 
@@ -47,16 +47,16 @@ public class Database {
         if(checkIfTableExists()) return;
 
         UserScore[] userScores = new UserScore[]{
-            new UserScore(2800, 10, "MasterBot", true),
-            new UserScore(2500, 9, "Recyclops", true),
-            new UserScore(2200, 8, "Bender", true),
-            new UserScore(2000, 7, "R2D2", true),
-            new UserScore(1700, 6, "Murderbot", true),
-            new UserScore(1500, 5, "Rusty", true),
-            new UserScore(1300, 4, "Ava", true),
-            new UserScore(1200, 3, "ThinMan", true),
-            new UserScore(1100, 2, "Homer", true),
-            new UserScore(1000, 1, "Atom", true),
+            new UserScore(280000, 10, "MasterBot", true),
+            new UserScore(250000, 9, "Recyclops", true),
+            new UserScore(220000, 8, "Bender", true),
+            new UserScore(200000, 7, "R2D2", true),
+            new UserScore(170000, 6, "Murderbot", true),
+            new UserScore(150000, 5, "Rusty", true),
+            new UserScore(130000, 4, "Ava", true),
+            new UserScore(120000, 3, "ThinMan", true),
+            new UserScore(110000, 2, "Homer", true),
+            new UserScore(100000, 1, "Atom", true),
         };
 
         for(UserScore u : userScores)
@@ -64,17 +64,33 @@ public class Database {
 
     }
 
+    public void clear(){
+        database.delete("ranking", "", null);
+
+        insertDummyRecords();
+    }
     public List<UserScore> getAll(){
+        return getAll(DatabaseQueries.SQL_QUERY);
+    }
+
+    public List<UserScore> getAllByPoints(){
+        return getAll(DatabaseQueries.SQL_QUERY_BY_POINTS);
+    }
+
+    public List<UserScore> getAllByErrors(){
+        return getAll(DatabaseQueries.SQL_QUERY_BY_ERRORS);
+    }
+
+    private List<UserScore> getAll(String query){
         List<UserScore> scores = new ArrayList<>();
 
-        cursor = database.rawQuery(DatabaseQueries.SQL_QUERY, null);
+        cursor = database.rawQuery(query, null);
 
         if(cursor.moveToFirst()){
-            indexId = cursor.getColumnIndex("_id");
-            indexName = cursor.getColumnIndex("name");
-            indexScore = cursor.getColumnIndex("score");
-            indexErrors = cursor.getColumnIndex("errors");
-            indexIsBot = cursor.getColumnIndex("bot");
+            int indexName = cursor.getColumnIndex("name");
+            int indexScore = cursor.getColumnIndex("score");
+            int indexErrors = cursor.getColumnIndex("errors");
+            int indexIsBot = cursor.getColumnIndex("bot");
 
             do{
 
@@ -82,7 +98,7 @@ public class Database {
                         cursor.getInt(indexScore),
                         cursor.getInt(indexErrors),
                         cursor.getString(indexName),
-                    cursor.getInt(indexIsBot) == 1));
+                        cursor.getInt(indexIsBot) == 1));
 
             }while (cursor.moveToNext());
         }

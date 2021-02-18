@@ -2,7 +2,7 @@ package com.game.model;
 
 import java.util.Comparator;
 
-public class UserScore implements Comparable<UserScore>, Comparator<UserScore> {
+public class UserScore {
     private int score;
     private int errors;
     private String name;
@@ -49,21 +49,4 @@ public class UserScore implements Comparable<UserScore>, Comparator<UserScore> {
         this.bot = bot;
     }
 
-    @Override
-    public int compareTo(UserScore o) {
-        int isBot1 = bot ? 0 : 1;
-        int isBot2 = o.isBot() ? 0 : 1;
-
-        return Integer.compare(score + isBot1, o.score + isBot2);
-    }
-
-
-
-    @Override
-    public int compare(UserScore o1, UserScore o2) {
-        int score1 = o1.getErrors() +( o1.isBot() ? 1 : 0);
-        int score2 = o2.getErrors() + (o2.isBot() ? 1 : 0);
-
-        return Integer.compare(score2, score1);
-    }
 }
