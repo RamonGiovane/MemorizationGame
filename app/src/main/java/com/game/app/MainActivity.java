@@ -203,24 +203,20 @@ public class MainActivity extends AppCompatActivity {
 
         sequence = new ArrayList<>();
 
-        sequence.add(1); sequence.add(2); sequence.add(3); sequence.add(4); sequence.add(5); sequence.add(6);
+        while(sequence.size()  < 6){
+            int value  = r.nextInt(6) + 1;
 
-        return;
-//
-//        while(sequence.size()  < 6){
-//            int value  = r.nextInt(6) + 1;
-//
-//            boolean repeated = false;
-//
-//            for(int v : sequence){
-//                if(value == v) {
-//                    repeated = true;
-//                    break;
-//                }
-//            }
-//
-//            if(!repeated) sequence.add(value);
-//        }
+            boolean repeated = false;
+
+            for(int v : sequence){
+                if(value == v) {
+                    repeated = true;
+                    break;
+                }
+            }
+
+            if(!repeated) sequence.add(value);
+        }
     }
 
     public void SaveAndRestart(View view){
